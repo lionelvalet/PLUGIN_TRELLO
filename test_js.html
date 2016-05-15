@@ -1,0 +1,89 @@
+<!-- demo sur -->
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="test_js.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://trello.com/1/client.js?key=8bf2d6c32e9d16ed28b3bcf4543b10ef"></script>
+    
+  </head>
+  
+  <body>
+
+    <span onclick="analyse()"> Go1 ...</span><br/>
+    <span onclick="analyse_bis()"> Go2 ...</span><br/><br/>
+    <span id="disconnect"> logout</span><br/>
+
+ </body>
+  
+</html>
+
+
+<script type="text/javascript">
+//identifiant: 8bf2d6c32e9d16ed28b3bcf4543b10ef
+//secret: 27b455f1f10dffe3a06ba8cf0c78a6a61dc52ea0521b79c8ea9df3b9a6b761f3
+
+//pour la connexion
+//https://trello.com/1/authorize?response_type=token&key=8bf2d6c32e9d16ed28b3bcf4543b10ef&redirect_uri=file%3A%2F%2F%2Fhome%2Flival%2FUDS%2FENS_NUMERIQUE%2FReFlexPro%2FPLUGIN_TRELLO%2Ftest_js.html%3Flogin%3Dtt%26mdp%3Dpp%23&callback_method=fragment&scope=read%2Cwrite&expiration=30days
+	//var obj_pers = new XMLHttpRequest();
+  //obj_pers.open("GET", "https://api.trello.com/1/members/lival/boards?key=8bf2d6c32e9d16ed28b3bcf4543b10ef", false);
+  //obj_pers.send(null);
+  //alert(obj_pers.responseText);
+  
+var logout = function() {
+    Trello.deauthorize();
+    alert("logout");
+};
+
+//Utilisation de l'API TRELLO via client.js jquery
+var authenticationSuccess = function() { 
+	alert ("login OK");	
+};
+
+var authenticationFailure = function() { console.log("Failed authentication"); };
+
+function analyse_bis(){
+	Trello.authorize({
+		type: "popup",
+		name: "test_lionel",
+    scope: { read: true, write: false },
+    expiration: "never",
+    success: authenticationSuccess,
+    error: authenticationFailure
+  });
+	
+  alert("ici");
+  
+}
+
+
+
+//lecture en d'un fichier JSON en local sur la machine
+function analyse(){
+	var obj_pers = new XMLHttpRequest();
+	obj_pers.open("GET", "test2.json", false);
+	//obj_pers.open("GET", "https://trello.com/1/authorize?key=8bf2d6c32e9d16ed28b3bcf4543b10ef&name=applicationname&expiration=never&response_type=token", false);
+  obj_pers.send(null);
+  
+  //if(obj_pers.readyState == 4) {
+		//alert(obj_pers.responseText);
+	//}	
+
+	var res = JSON.parse(obj_pers.responseText);
+	
+	for( v in res.cards){ //lists
+		var x = document.createElement("p");
+		var t = document.createTextNode(res.cards[v].name);  
+		x.appendChild(t);    
+    document.body.appendChild(x);
+	}
+		
+}
+
+$("#disconnect").click(logout);
+
+</script>

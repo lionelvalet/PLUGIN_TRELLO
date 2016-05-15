@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+		<script src="jquery-1.12.3.js"></script>
+		
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="connexion_trello.css" />
+    
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->    
+    <script src="https://trello.com/1/client.js?key=8bf2d6c32e9d16ed28b3bcf4543b10ef"></script>
+    
+    
+    <script type="text/javascript" src="connexion_trello.js"></script>
+    
+  </head>
+  
+  <body>
+
+  <div id="loggedout">
+    <a id="connectLink" href="#">Connect To Trello</a>
+  </div>
+
+  <div id="loggedin">
+    <div id="header">
+        Logged in to as <span id="fullName"></span> 
+        <a id="disconnect" href="#">Log Out</a>
+    </div>
+    
+    <div id="output"></div>
+  </div>    
+
+  <p id="essai">test</p>
+  
+  </body>
+  
+</html>
+
